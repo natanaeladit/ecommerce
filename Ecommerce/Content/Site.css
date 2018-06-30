@@ -16,3 +16,85 @@ textarea {
     max-width: 280px;
 }
 
+.basket {
+    font-weight: bold;
+    font-size: .8em;
+    float: right;
+    background: none;
+    border: 1px solid #FCFBF9;
+    color: white;
+    letter-spacing: normal;
+    position: relative;
+    margin-right: 20px;
+}
+
+.basket span {
+    color: #FCFBF9
+}
+
+.basket:hover {
+    background: #FCFBF9
+}
+
+.basket:hover span{
+    color: black
+}
+
+.basket span {
+    margin-right: 5px;
+    margin-left: -20px;
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+.basket table {
+    position: absolute;
+    margin-top: 20px;
+    right: -1px;
+    display: none;
+    border: 1px solid #2dbb9b;
+    background: #fff;
+    color: #808080;
+    z-index: 3;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.basket:hover table {
+    display: table
+}
+
+.basket table tr {
+    transition: .3s;
+    -webkit-transition: .3s;
+    padding: 20px
+}
+
+.basket table tr:hover {
+    opacity: .5
+}
+
+.basket table tr:last-child:hover {
+    opacity: 1
+}
+
+.basket table tr:last-child a {
+    padding: 10px 20px;
+    float: right;
+    color: #2dbb9b;
+    opacity: .7;
+    transition: .3s;
+    font-weight: bold;
+    letter-spacing: normal;
+    -webkit-transition: .3s;
+}
+
+.basket table tr:last-child a:hover {
+    opacity: 1;
+    background: #2dbb9b;
+    color: #fff
+}
+
+.basket table td {
+    padding: 10px 20px;
+}

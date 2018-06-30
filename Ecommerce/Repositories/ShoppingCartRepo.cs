@@ -61,5 +61,11 @@ namespace Ecommerce.Repositories
             _carts.RemoveAll(p => p.Id == id);
             return true;
         }
+
+        public bool Clear()
+        {
+            _carts.Clear();
+            return true;
+        }
     }
 }

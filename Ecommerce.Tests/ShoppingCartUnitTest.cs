@@ -122,5 +122,22 @@ namespace Ecommerce.Tests
             // Assert
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void WhenClearCart_ThenCartIsEmpty()
+        {
+            // Arrange
+            List<ShoppingCart> carts = new List<ShoppingCart>() {
+                new ShoppingCart() { Id=1, ProductId = 1, ProductName = "A" },
+                new ShoppingCart() { Id=2, ProductId = 2, ProductName = "B" }
+            };
+            mockCartRepo.Setup(x => x.Clear()).Returns(true);
+            
+            // Act
+            var result = mockCartRepo.Object.Clear();
+
+            // Assert
+            Assert.IsTrue(result);
+        }
     }
 }

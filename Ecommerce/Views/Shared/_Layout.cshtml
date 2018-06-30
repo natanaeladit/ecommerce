@@ -17,10 +17,19 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link basket">
+                        <span>Your Basket: </span><span>@ViewBag.CartUnits</span>
+                        <table>
+                            @foreach (var c in ViewBag.Cart)
+                            {
+                                <tr><td>@c.Quantity x @String.Format("{0:c}", c.UnitPrice)</td><td>@c.ProductName</td></tr>
+                            }
+                            <tr>
+                                <td>Total: @String.Format("{0:c}", ViewBag.CartTotalPrice)</td>
+                                <td>@Html.ActionLink("Check Out", "Index", "Checkout")</td>
+                            </tr>
+                        </table>
+                    </a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

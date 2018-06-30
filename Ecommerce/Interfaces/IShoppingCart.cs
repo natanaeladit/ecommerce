@@ -11,5 +11,6 @@ namespace Ecommerce.Interfaces
         ShoppingCart Add(ShoppingCart cart);
         bool Update(ShoppingCart cart);
         bool Delete(int id);
+        bool Clear();
     }
 }

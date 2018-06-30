@@ -4,15 +4,13 @@ using System.Web.Mvc;
 
 namespace Ecommerce.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IProductRepo _prodRepo;
-        private readonly IShoppingCartRepo _cartRepo;
         
-        public HomeController(IProductRepo prodRepo, IShoppingCartRepo cartRepo)
+        public HomeController(IProductRepo prodRepo, IShoppingCartRepo cartRepo) : base (cartRepo)
         {
             _prodRepo = prodRepo;
-            _cartRepo = cartRepo;
         }
 
         // GET: Home

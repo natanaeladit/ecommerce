@@ -15,11 +15,11 @@ namespace Ecommerce.Repositories
         {
             if(!_isDataInitialized)
             {
-                Add(new Product() { Name = "Product A", Description = "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.", Price = 10, StockQty = 10 });
-                Add(new Product() { Name = "Product B", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", Price = 20, StockQty = 12 });
-                Add(new Product() { Name = "Product C", Description = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", Price = 30, StockQty = 8 });
-                Add(new Product() { Name = "Product D", Description = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", Price = 40, StockQty = 30 });
-                Add(new Product() { Name = "Product E", Description = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", Price = 50, StockQty = 11 });
+                Add(new Product() { Name = "Product A", Description = "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.", Price = 10, StockQty = 3 });
+                Add(new Product() { Name = "Product B", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", Price = 20, StockQty = 4 });
+                Add(new Product() { Name = "Product C", Description = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", Price = 30, StockQty = 5 });
+                Add(new Product() { Name = "Product D", Description = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", Price = 40, StockQty = 3 });
+                Add(new Product() { Name = "Product E", Description = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", Price = 50, StockQty = 2 });
                 _isDataInitialized = true;
             }
         }
