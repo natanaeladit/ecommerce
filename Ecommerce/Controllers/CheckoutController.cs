@@ -1,5 +1,6 @@
 ﻿using Ecommerce.DomainModels;
 using Ecommerce.Interfaces;
+using Ecommerce.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,8 +70,9 @@ namespace Ecommerce.Controllers
             {
                 quantity = cart.Quantity;
             }
+            int totalBasket = _cartRepo.GetAll().Count;
 
-            return Json(new { d = quantity });
+            return Json(new { d = quantity, t = totalBasket });
         }
 
         [HttpGet]
@@ -83,6 +85,8 @@ namespace Ecommerce.Controllers
                 total = carts.Sum(p => p.UnitPrice * p.Quantity);
             }
             catch (Exception) { total = 0; }
+
+            ViewBag.CartTotalPrice = total;
 
             return Json(new { d = String.Format("{0:c}", total) }, JsonRequestBehavior.AllowGet);
         }
@@ -107,10 +111,21 @@ namespace Ecommerce.Controllers
             return RedirectToAction("Index", "Home", null);
         }
 
-        public ActionResult Purchase()
+        public ActionResult Payment()
         {
             ViewBag.Cart = _cartRepo.GetAll();
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Payment(OrderModel model)
+        {
+            _cartRepo.Clear();
+            ViewBag.Cart = _cartRepo.GetAll();
+            ViewBag.CartTotalPrice = 0;
+            ViewBag.CartUnits = 0;
+            return View("PaymentSuccess");
         }
     }
 }

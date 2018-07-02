@@ -1,6 +1,6 @@
-﻿namespace Ecommerce.DomainModels
+﻿namespace Ecommerce.Models
 {
-    public class User
+    public class UserModel
     {
         public string Username { get; set; }
         public string Password { get; set; }

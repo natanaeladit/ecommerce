@@ -18,14 +18,14 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link basket">
-                        <span>Your Basket: </span><span>@ViewBag.CartUnits</span>
+                        <span>Your Basket: </span><span id="totalBasket">@ViewBag.CartUnits</span>
                         <table>
                             @foreach (var c in ViewBag.Cart)
                             {
-                                <tr><td>@c.Quantity x @String.Format("{0:c}", c.UnitPrice)</td><td>@c.ProductName</td></tr>
+                                <tr id="row_@(c.ProductId)"><td><span id="row_qty_@(c.ProductId)">@c.Quantity</span> x @String.Format("{0:c}", c.UnitPrice)</td><td>@c.ProductName</td></tr>
                             }
                             <tr>
-                                <td>Total: @String.Format("{0:c}", ViewBag.CartTotalPrice)</td>
+                                <td>Total: <span id="totalPriceHeader">@String.Format("{0:c}", ViewBag.CartTotalPrice)</span></td>
                                 <td>@Html.ActionLink("Check Out", "Index", "Checkout")</td>
                             </tr>
                         </table>

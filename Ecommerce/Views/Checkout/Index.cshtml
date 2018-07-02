@@ -34,7 +34,7 @@
             </table>
             <div class="button float-right">
                 @Html.ActionLink("Clear Cart", "Clear", "Checkout", null, new { @class = "btn btn-default" })
-                @Html.ActionLink("Continue", "Purchase", "Checkout", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Continue", "Payment", "Checkout", null, new { @class = "btn btn-success" })
             </div>
         }
     </div>
@@ -54,6 +54,7 @@
                 }
 
                 $('#totalPrice').text(msg.d);
+                $('#totalPriceHeader').text(msg.d);
             }
         })
     }
@@ -71,10 +72,13 @@
             success: function (msg) {
                 if (msg.d == 0) {
                     el.parentNode.parentNode.remove();
+                    $('#row_' + pid).remove();
+                    $('#totalBasket').text(msg.t);
                 } else {
-                    $(el).siblings('span')[0].innerHTML = msg.d
+                    $(el).siblings('span')[0].innerHTML = msg.d;
+                    $('#row_qty_' + pid).text(msg.d);
                 }
-                UpdateTotalPrice()
+                UpdateTotalPrice();
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 debugger;
