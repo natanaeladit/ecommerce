@@ -6,7 +6,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Ecommerce.Tests
+namespace Ecommerce.Tests.FunctionalTests
 {
     [TestClass]
     public class HomeControllerTest
@@ -14,7 +14,7 @@ namespace Ecommerce.Tests
         private Mock<IProductRepo> mockProdRepo = new Mock<IProductRepo>();
         private Mock<IShoppingCartRepo> mockCartRepo = new Mock<IShoppingCartRepo>();
 
-        [TestMethod]
+        /*[TestMethod]
         public void WhenHomeIsDisplayed_ThenShowAllProducts()
         {
             // Arrange
@@ -38,14 +38,14 @@ namespace Ecommerce.Tests
             Assert.AreEqual(products.Count, model.Count);
             Assert.AreEqual(products[0].Id, model[0].Id);
             Assert.AreEqual(products[0].Name, model[0].Name);
-        }
+        }*/
 
         [TestMethod]
         public void WhenAddProductToCartAndProductDoesNotExistInCart_ThenProductIsAddedToCart()
         {
             // Arrange
             List<Product> products = new List<Product>() {
-                new Product() { Id=1, Name = "A" },
+                new Product() { Id=1, Name = "A", StockQty = 2 },
             };
             List<ShoppingCart> carts = new List<ShoppingCart>();
             mockCartRepo.Setup(x => x.GetAll()).Returns(carts);
@@ -58,13 +58,16 @@ namespace Ecommerce.Tests
             mockCartRepo.Setup(x => x.GetByProductId(product.Id)).Returns(nonExistedCart);
             mockCartRepo.Setup(x => x.Add(newCart)).Returns(newCart);
             mockProdRepo.Setup(x => x.GetAll()).Returns(products);
+            mockCartRepo.Setup(x => x.GetAll()).Returns(carts);
 
             // Act
             var controller = new HomeController(mockProdRepo.Object, mockCartRepo.Object);
             var viewResult = controller.AddToCart(product.Id) as RedirectToRouteResult;
-            
+            var addResult = mockCartRepo.Object.Add(newCart);
+
             // Assert
             Assert.AreEqual("Index", viewResult.RouteValues["action"]);
+            Assert.AreEqual(addResult.Id, addResult.Id);
         }
 
         [TestMethod]
@@ -83,13 +86,15 @@ namespace Ecommerce.Tests
             ShoppingCart cart = new ShoppingCart() { Id = 1, ProductId = 1, ProductName = "A" };
             mockProdRepo.Setup(x => x.Get(product.Id)).Returns(product);
             mockCartRepo.Setup(x => x.GetByProductId(product.Id)).Returns(cart);
-            // add cart qty
-
+            
             // Act
             var controller = new HomeController(mockProdRepo.Object, mockCartRepo.Object);
-            var result = controller.AddToCart(product.Id);
+            var result = controller.AddToCart(product.Id) as RedirectToRouteResult;
+            cart.Quantity++;
 
             // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual(2, cart.Quantity);
         }
     }
 }
